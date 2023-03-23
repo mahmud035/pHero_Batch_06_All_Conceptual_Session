@@ -20,7 +20,7 @@ function LessonTwo() {
   return (
     <div className="flex flex-col items-center">
       <div className="p-2 rounded-md shadow-2xl w-full max-w-5xl mx-5 bg-white">
-        <div className=" bg-gradient-to-tr to-purple-100 from-cyan-100 rounded-sm p-8">
+        <div className=" bg-gradient-to-tr to-purple-100 from-cyan-100 rounded-sm p-8 ">
           <h1 className="text-2xl mb-5 font-bold text-gray-800">
             {post.title}
           </h1>

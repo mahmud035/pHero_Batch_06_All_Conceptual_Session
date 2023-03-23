@@ -12,6 +12,7 @@ function LessonTwo() {
       .then((res) => res.json())
       .then((data) => setPost(data));
   }, []);
+
   return (
     <div className="p-2 rounded-md shadow-2xl w-full max-w-5xl mx-5 bg-white">
       <div className=" bg-gradient-to-tr to-purple-100 from-cyan-100 rounded-sm p-8">

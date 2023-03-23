@@ -11,9 +11,9 @@ function LessonThree() {
       <div className="p-2 rounded-md shadow-2xl w-full max-w-xl mx-5 mb-10 bg-white">
         <div className=" bg-gradient-to-tr to-purple-100 from-cyan-100 rounded-sm p-5">
           <h1 className="text-2xl mb-5 font-bold text-gray-800">
-            Name: {name}{' '}
+            Name: {name}
           </h1>
-          <p className="text-gray-700">Email: {email} </p>
+          <p className="text-gray-700">Email: {email}</p>
         </div>
       </div>
       <div className="w-full max-w-xl bg-gradient-to-tr to-purple-100 from-cyan-100 p-2 rounded-md shadow-2xl">
@@ -36,7 +36,7 @@ function LessonThree() {
             </label>
             <input
               className="border border-cyan-400 rounded p-1  w-full ml-5 focus:outline-purple-400"
-              type="text"
+              type="email"
               name="email"
               id="email"
               onChange={(e) => setEmail(e.target.value)}

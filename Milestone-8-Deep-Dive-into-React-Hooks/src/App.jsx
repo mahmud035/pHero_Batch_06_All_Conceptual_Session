@@ -16,9 +16,9 @@ function App() {
       {/* <LessonFour /> */}
       {/* <Explain /> */}
 
-      <EffectExplain />
+      {/* <EffectExplain /> */}
       {/* <EffectLessonOne /> */}
-      {/* <EffectLessonTwo /> */}
+      <EffectLessonTwo />
     </div>
   );
 }

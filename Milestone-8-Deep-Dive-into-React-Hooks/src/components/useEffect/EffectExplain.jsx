@@ -8,7 +8,11 @@ function EffectExplain() {
   useEffect(() => {
     console.count('Effect');
 
-    return () => {};
+    return () => {
+      console.log('Clean kortechi');
+      // clean up action
+      console.log('Done');
+    };
   }, [toggle]);
 
   return (

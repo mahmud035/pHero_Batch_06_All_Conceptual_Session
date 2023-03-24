@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 
 function LessonFour() {
   const [user, setUser] = useState({
-    name: 'Mir',
-    email: 'mir@gmail.com',
+    name: '',
+    email: '',
   });
 
-  // console.log(user);
+  console.log(user);
 
-  const handleInput = (event) => {
-    setUser((current) => {
-      return { ...current, [event.target.name]: event.target.value };
+  const handleInput = (e) => {
+    console.log(e.target.value);
+
+    setUser((prevUser) => {
+      return {
+        ...prevUser,
+        [e.target.name]: [e.target.value],
+      };
     });
   };
 
@@ -44,7 +49,7 @@ function LessonFour() {
             </label>
             <input
               className="border border-cyan-400 rounded p-1  w-full ml-5 focus:outline-purple-400"
-              type="text"
+              type="email"
               name="email"
               id="email"
               onChange={(e) => handleInput(e)}

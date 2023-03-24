@@ -26,7 +26,6 @@ function LessonThree() {
               className="border border-cyan-400 rounded p-1 w-full ml-5 focus:outline-purple-400"
               type="text"
               name="name"
-              id="name"
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -38,7 +37,6 @@ function LessonThree() {
               className="border border-cyan-400 rounded p-1  w-full ml-5 focus:outline-purple-400"
               type="email"
               name="email"
-              id="email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function Explain() {
+function EffectExplain() {
   const [toggle, setToggle] = useState(true);
 
   console.count('Render');
@@ -8,16 +8,12 @@ function Explain() {
   useEffect(() => {
     console.count('Effect');
 
-    return () => {
-      console.log('Clean korteesi');
-      // cleanup action
-      console.log('Done');
-    };
+    return () => {};
   }, [toggle]);
 
   return (
     <div>
-      {toggle && <h1>Explain</h1>}
+      {toggle && <h1>Effect Explain</h1>}
       <button
         className="px-3 py-2 bg-cyan-400 rounded-md"
         onClick={() => setToggle(!toggle)}
@@ -28,4 +24,4 @@ function Explain() {
   );
 }
 
-export default Explain;
+export default EffectExplain;

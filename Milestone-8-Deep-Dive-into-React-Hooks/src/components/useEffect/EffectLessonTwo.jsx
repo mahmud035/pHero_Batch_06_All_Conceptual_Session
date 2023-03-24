@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function LessonTwo() {
+function EffectLessonTwo() {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
@@ -23,4 +23,4 @@ function LessonTwo() {
   );
 }
 
-export default LessonTwo;
+export default EffectLessonTwo;

@@ -1,3 +1,6 @@
+import EffectExplain from './components/useEffect/EffectExplain';
+import EffectLessonOne from './components/useEffect/EffectLessonOne';
+import EffectLessonTwo from './components/useEffect/EffectLessonTwo';
 import Explain from './components/useState/Explain';
 import LessonFour from './components/useState/LessonFour';
 import LessonOne from './components/useState/LessonOne';
@@ -10,8 +13,12 @@ function App() {
       {/* <LessonOne /> */}
       {/* <LessonTwo /> */}
       {/* <LessonThree /> */}
-      <LessonFour />
+      {/* <LessonFour /> */}
       {/* <Explain /> */}
+
+      <EffectExplain />
+      {/* <EffectLessonOne /> */}
+      {/* <EffectLessonTwo /> */}
     </div>
   );
 }

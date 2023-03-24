@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 //* Initial Value & white screen issue (useState)
 
-function LessonTwo() {
+function EffectLessonOne() {
   const [post, setPost] = useState({});
   const [randomNumber, setRandomNumber] = useState(1);
 
@@ -39,4 +39,4 @@ function LessonTwo() {
   );
 }
 
-export default LessonTwo;
+export default EffectLessonOne;

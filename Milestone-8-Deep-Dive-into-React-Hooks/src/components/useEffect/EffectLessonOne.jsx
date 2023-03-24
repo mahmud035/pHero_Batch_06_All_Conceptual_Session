@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 
-//* Initial Value & white screen issue (useState)
-
 function EffectLessonOne() {
   const [post, setPost] = useState({});
   const [randomNumber, setRandomNumber] = useState(1);
+
+  console.log(post);
+
+  const handleRandomPost = () => {
+    const rNumber = Math.ceil(Math.random() * 100);
+    setRandomNumber(rNumber);
+  };
 
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/posts/${randomNumber}`)
       .then((res) => res.json())
       .then((data) => setPost(data));
   }, [randomNumber]);
-
-  const handleNewPost = () => {
-    const rNumber = Math.ceil(Math.random() * 10);
-    setRandomNumber(rNumber);
-  };
 
   return (
     <div className="flex flex-col items-center">
@@ -29,7 +29,7 @@ function EffectLessonOne() {
       </div>
       <div className="mt-10">
         <button
-          onClick={handleNewPost}
+          onClick={handleRandomPost}
           className="px-3 py-2 bg-gradient-to-tr to-purple-100 from-cyan-100 rounded-md border-4 border-white"
         >
           New post

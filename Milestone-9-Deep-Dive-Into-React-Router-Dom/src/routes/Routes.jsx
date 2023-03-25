@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import About from '../components/About';
+import BookDetails from '../components/BookDetails';
 import Books from '../components/Books';
 import ErrorPage from '../components/ErrorPage';
 import Home from '../components/Home';
@@ -26,6 +27,16 @@ const router = createBrowserRouter([
       {
         path: '/books',
         element: <Books />,
+        loader: async () => {
+          return fetch('https://api.itbook.store/1.0/new');
+        },
+      },
+      {
+        path: '/books/:isbn13',
+        element: <BookDetails />,
+        loader: async ({ params }) => {
+          return fetch(`https://api.itbook.store/1.0/books/${params.isbn13}`);
+        },
       },
     ],
   },

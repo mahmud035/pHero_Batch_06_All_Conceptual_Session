@@ -1,7 +1,10 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 const BookDetails = () => {
-  const bookData = {};
+  const bookData = useLoaderData();
+  // console.log(bookData);
+
   const { image, title, desc, authors, publisher, year, rating, pdf, price } =
     bookData;
 

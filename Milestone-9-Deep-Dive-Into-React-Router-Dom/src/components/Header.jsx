@@ -39,7 +39,11 @@ const Header = () => {
                 to="/home"
                 aria-label="Home"
                 title="Home"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'font-medium tracking-wide text-blue-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                    : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                }
               >
                 Home
               </NavLink>
@@ -49,7 +53,11 @@ const Header = () => {
                 to="/books"
                 aria-label="Books"
                 title="Books"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'font-medium tracking-wide text-blue-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                    : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                }
               >
                 Books
               </NavLink>
@@ -59,7 +67,11 @@ const Header = () => {
                 to="/about"
                 aria-label="About us"
                 title="About us"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'font-medium tracking-wide text-blue-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                    : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                }
               >
                 About us
               </NavLink>
@@ -141,7 +153,11 @@ const Header = () => {
                           to="/"
                           aria-label="Home"
                           title="Home"
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          className={({ isActive }) =>
+                            isActive
+                              ? 'font-medium tracking-wide text-blue-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                              : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                          }
                         >
                           Home
                         </NavLink>
@@ -151,7 +167,11 @@ const Header = () => {
                           to="/books"
                           aria-label="Books"
                           title="Books"
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          className={({ isActive }) =>
+                            isActive
+                              ? 'font-medium tracking-wide text-blue-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                              : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                          }
                         >
                           Books
                         </NavLink>
@@ -161,7 +181,11 @@ const Header = () => {
                           to="/about"
                           aria-label="About Us"
                           title="About Us"
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          className={({ isActive }) =>
+                            isActive
+                              ? 'font-medium tracking-wide text-blue-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                              : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                          }
                         >
                           About Us
                         </NavLink>

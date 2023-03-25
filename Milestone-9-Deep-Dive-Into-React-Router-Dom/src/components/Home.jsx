@@ -15,7 +15,9 @@ const Home = () => {
             </div>
             <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
               A reader lives a <br className="hidden md:block" /> thousand lives
-              <span className="inline-block text-blue-400">before he dies</span>
+              <span className="inline-block text-blue-400">
+                &nbsp;before he dies
+              </span>
             </h2>
             <p className="text-base text-gray-700 md:text-lg">
               Books are a uniquely portable magic. Books serve to show a man

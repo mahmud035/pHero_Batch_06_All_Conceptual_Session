@@ -1,6 +1,7 @@
 import React from 'react';
 import Lottie from 'lottie-react';
 import reader from '../assets/reader.json';
+import chatbot from '../assets/chatbot.json';
 
 const Home = () => {
   return (
@@ -84,7 +85,7 @@ const Home = () => {
         </div>
         <div className="relative lg:w-1/2 ">
           <div className="w-full lg:w-4/5 lg:ml-auto h-56  sm:h-96">
-            <Lottie animationData={reader} loop={true} />
+            <Lottie animationData={chatbot} loop={true} />
           </div>
         </div>
       </div>

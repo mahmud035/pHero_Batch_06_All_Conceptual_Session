@@ -3,8 +3,8 @@ import { useLoaderData } from 'react-router-dom';
 import Book from './Book';
 
 const Books = () => {
-  const data = useLoaderData();
-  const booksData = data.books;
+  const loaderData = useLoaderData();
+  const booksData = loaderData.books;
   // console.log(booksData);
 
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -23,9 +24,9 @@ const Navbar = () => {
           <span className="ml-3 text-xl">AuthenTech</span>
         </a>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <a href="#" className="mr-5 hover:text-gray-900">
+          <Link to="/home" className="mr-5 hover:text-gray-900">
             Home
-          </a>
+          </Link>
 
           <a href="#" className="mr-5 hover:text-gray-900">
             Profile
@@ -48,9 +49,9 @@ const Navbar = () => {
             </svg>
           </button>
 
-          <a href="#" className="mr-5 hover:text-gray-900">
+          <Link to="/login" className="mr-5 hover:text-gray-900">
             Login
-          </a>
+          </Link>
         </nav>
       </div>
     </header>

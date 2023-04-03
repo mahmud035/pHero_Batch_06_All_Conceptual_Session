@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Main from '../layout/Main';
-import ErrorPage from '../shared/ErrorPage';
 import Home from '../components/Home';
 import Login from '../components/Login';
-import Register from '../components/Register';
 import Profile from '../components/Profile';
+import Register from '../components/Register';
+import Main from '../layout/Main';
+import ErrorPage from '../shared/ErrorPage';
+import Wallet from '../components/Wallet';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile />,
+      },
+      {
+        path: '/wallet',
+        element: <Wallet />,
       },
     ],
   },

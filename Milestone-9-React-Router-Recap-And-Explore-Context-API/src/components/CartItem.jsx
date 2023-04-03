@@ -1,8 +1,6 @@
-import React, { useContext } from 'react';
-import { CartContext } from '../context/CartProvider';
+import React from 'react';
 
-const CartItem = ({ product }) => {
-  const { handleRemoveFromCart } = useContext(CartContext);
+const CartItem = ({ product, handleRemoveFromCart }) => {
   const { id, name, price, quantity, picture } = product;
 
   return (

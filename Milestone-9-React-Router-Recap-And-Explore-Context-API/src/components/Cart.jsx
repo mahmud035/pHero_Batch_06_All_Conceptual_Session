@@ -8,6 +8,14 @@ import { toast } from 'react-toastify';
 const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
+  const handleRemoveFromCart = (productId) => {
+    const remaining = cart.filter((product) => product.id !== productId);
+
+    setCart(remaining);
+    removeFromDb(productId); // remove from local storage
+    toast.warning('Product Removed!');
+  };
+
   let total = 0;
 
   for (const product of cart) {
@@ -33,7 +41,11 @@ const Cart = () => {
         </h2>
         <ul className="flex flex-col divide-y divide-gray-700">
           {cart.map((product) => (
-            <CartItem key={product.id} product={product} />
+            <CartItem
+              key={product.id}
+              product={product}
+              handleRemoveFromCart={handleRemoveFromCart}
+            />
           ))}
         </ul>
         <div className="space-y-1 text-right">

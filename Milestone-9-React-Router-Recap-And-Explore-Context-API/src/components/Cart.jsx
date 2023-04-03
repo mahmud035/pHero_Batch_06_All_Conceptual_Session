@@ -2,9 +2,28 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartProvider';
 import CartItem from './CartItem';
+import { deleteShoppingCart } from '../utils/fakeDB';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
-  const { cart } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
+
+  let total = 0;
+
+  for (const product of cart) {
+    total = total + product.price * product.quantity;
+  }
+
+  const orderHandler = () => {
+    if (cart.length) {
+      setCart([]);
+
+      deleteShoppingCart();
+      toast.success('Order Placed!');
+    } else {
+      toast.error('Cart is empty');
+    }
+  };
 
   return (
     <div className="flex min-h-screen items-start justify-center bg-gray-100 text-gray-900">
@@ -19,7 +38,7 @@ const Cart = () => {
         </ul>
         <div className="space-y-1 text-right">
           <p>
-            Total amount: <span className="font-semibold">00$</span>
+            Total amount: <span className="font-semibold">{total}$</span>
           </p>
           <p className="text-sm text-gray-400">
             Not including taxes and shipping costs
@@ -36,6 +55,7 @@ const Cart = () => {
           </Link>
           <button
             type="button"
+            onClick={orderHandler}
             className="px-6 py-2 border font-semibold rounded-full hover:bg-cyan-400 bg-cyan-200 text-gray-800"
           >
             Place Order

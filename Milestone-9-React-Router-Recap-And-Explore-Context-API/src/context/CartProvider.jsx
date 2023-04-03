@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { addToDb } from '../utils/fakeDB';
+import { toast } from 'react-toastify';
 
 export const CartContext = createContext([]);
 
@@ -20,12 +21,13 @@ const CartProvider = ({ children }) => {
       const restProducts = cart.filter(
         (existingProduct) => existingProduct.id !== product.id
       );
-      exist.quantity = exist.quantity + 1;
+      exist.quantity = exist.quantity + 1; // update product quantity
       setCart([...restProducts, exist]);
     }
 
     // Add product to local storage
-    // addToDb(product.id);
+    addToDb(product.id);
+    toast.success('Product added successfully');
   };
 
   const handleRemoveFromCart = (productId) => {

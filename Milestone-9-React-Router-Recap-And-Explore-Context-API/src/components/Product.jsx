@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from '../context/CartProvider';
 
 const Product = ({ product }) => {
+  const { handleAddToCart } = useContext(CartContext);
   const { name, picture, price, category } = product;
 
   return (
@@ -15,6 +17,7 @@ const Product = ({ product }) => {
       <p className="text-gray-700 font-bold">Price: {price}$</p>
       <button
         type="button"
+        onClick={() => handleAddToCart(product)}
         className="px-8 block w-full mt-4 py-3 font-semibold rounded-full bg-cyan-200 text-gray-800 hover:bg-cyan-400"
       >
         Add To Cart

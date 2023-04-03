@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../context/CartProvider';
 
 const Header = () => {
+  const { cart } = useContext(CartContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -53,7 +55,9 @@ const Header = () => {
               title="Cart"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              <p> Cart</p>
+              <p>
+                Cart <sup>{cart.length}</sup>
+              </p>
             </Link>
           </li>
           <li>

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from '../context/CartProvider';
 
-const CartItem = () => {
-  const product = {};
+const CartItem = ({ product }) => {
+  const { handleRemoveFromCart } = useContext(CartContext);
   const { id, name, price, quantity, picture } = product;
 
   return (
@@ -30,6 +31,7 @@ const CartItem = () => {
           <div className="flex text-sm divide-x">
             <button
               type="button"
+              onClick={() => handleRemoveFromCart(id)}
               className="flex items-center px-2 py-1 pl-0 space-x-1"
             >
               <svg

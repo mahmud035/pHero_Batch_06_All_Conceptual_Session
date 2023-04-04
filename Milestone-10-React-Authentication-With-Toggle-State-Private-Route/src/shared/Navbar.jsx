@@ -1,15 +1,19 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/UserContext';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout().then(() => {
-      navigate('/login');
-    });
+    logout()
+      .then(() => {
+        toast.warn('User logged out');
+        navigate('/login');
+      })
+      .catch((error) => toast.error(error.message));
   };
 
   return (
@@ -37,7 +41,7 @@ const Navbar = () => {
           <Link to="/home" className="mr-5 hover:text-gray-900">
             Home
           </Link>
-          {user?.uid ? (
+          {user?.email ? (
             <>
               <Link to="/profile" className="mr-5 hover:text-gray-900">
                 Profile

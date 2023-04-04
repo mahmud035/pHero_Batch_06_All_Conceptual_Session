@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import avatarImg from '../assets/avatar.jpeg';
+import { AuthContext } from '../context/UserContext';
 
 const Profile = () => {
-  const user = {};
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="flex justify-center mt-20">
       <div className="max-w-lg p-8 sm:flex sm:space-x-6 bg-gray-100 text-gray-900">
@@ -44,7 +46,16 @@ const Profile = () => {
             </span>
             <span className="flex items-center space-x-2 w-full">
               <span className="text-gray-400 text-small">
-                Email Status: <span className="text-green-400">Undefined</span>
+                Email Status:{' '}
+                {user?.emailVerified ? (
+                  <>
+                    <span className="text-green-400">Verified</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-red-400">Not Verified</span>
+                  </>
+                )}
               </span>
             </span>
             <span className="flex items-center space-x-2 w-full">

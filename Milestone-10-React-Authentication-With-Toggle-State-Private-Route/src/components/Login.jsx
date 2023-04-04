@@ -1,17 +1,30 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/UserContext';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-  const { signInWithGoogle } = useContext(AuthContext);
+  const { signInWithGoogle, signin } = useContext(AuthContext);
+  const navigate = useNavigate();
 
+  //? Signin with email and password
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    //* 5. email & password signin
+    signin(email, password)
+      .then((result) => {
+        console.log(result.user);
+        toast.success('Sign in Successfully');
+        navigate('/');
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   const handleGoogleSignIn = () => {

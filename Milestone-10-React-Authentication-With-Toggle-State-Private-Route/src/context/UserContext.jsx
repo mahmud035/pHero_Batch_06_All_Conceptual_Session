@@ -4,6 +4,7 @@ import {
   getAuth,
   onAuthStateChanged,
   sendEmailVerification,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
@@ -39,7 +40,12 @@ const UserContext = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  //* 5. logout
+  //* 5. email & password signin
+  const signin = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  //* 6. logout / sign out
   const logout = () => {
     return signOut(auth);
   };
@@ -60,6 +66,7 @@ const UserContext = ({ children }) => {
     updateName,
     verifyEmail,
     signInWithGoogle,
+    signin,
     logout,
   };
 

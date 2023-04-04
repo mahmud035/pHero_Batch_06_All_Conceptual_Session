@@ -44,6 +44,7 @@ const Register = () => {
       });
   };
 
+  //? google signin
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {

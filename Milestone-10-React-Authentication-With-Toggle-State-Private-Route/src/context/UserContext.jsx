@@ -1,8 +1,9 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   sendEmailVerification,
   signInWithPopup,
   signOut,
@@ -14,6 +15,8 @@ const auth = getAuth(app);
 export const AuthContext = createContext();
 
 const UserContext = ({ children }) => {
+  const [user, setUser] = useState({});
+
   const googleProvider = new GoogleAuthProvider();
 
   //* create user
@@ -41,7 +44,18 @@ const UserContext = ({ children }) => {
     return signOut(auth);
   };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const authInfo = {
+    user,
     createUser,
     updateName,
     verifyEmail,

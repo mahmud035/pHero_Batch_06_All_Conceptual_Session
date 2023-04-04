@@ -7,7 +7,7 @@ const Login = () => {
   const { signInWithGoogle, signin, resetPassword } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(location);
+  console.log(location);
 
   const from = location?.state?.from?.pathname || '/';
 
@@ -35,7 +35,7 @@ const Login = () => {
   //? 4. google signin
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then(() => {
+      .then((result) => {
         console.log(result.user);
 
         toast.success('Sign in Successfully');

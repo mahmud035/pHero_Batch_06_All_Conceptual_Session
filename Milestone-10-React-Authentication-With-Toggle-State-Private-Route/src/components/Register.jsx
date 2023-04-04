@@ -1,11 +1,17 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../context/UserContext';
 
 const Register = () => {
   const { createUser, updateName, verifyEmail, signInWithGoogle } =
     useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
+
+  const from = location?.state?.from?.pathname || '/';
 
   //? Signup with email and password
   const handleSubmit = (e) => {
@@ -30,6 +36,7 @@ const Register = () => {
             verifyEmail()
               .then(() => {
                 toast.info('Please check your email for verification link');
+                navigate(from, { replace: true });
               })
               .catch((error) => {
                 toast.error(error.message);
@@ -49,6 +56,7 @@ const Register = () => {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);

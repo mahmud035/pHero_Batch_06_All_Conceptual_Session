@@ -18,7 +18,7 @@ function App() {
 
       {/* <EffectExplain /> */}
       {/* <EffectLessonOne /> */}
-      <EffectLessonTwo />
+      {/* <EffectLessonTwo /> */}
     </div>
   );
 }

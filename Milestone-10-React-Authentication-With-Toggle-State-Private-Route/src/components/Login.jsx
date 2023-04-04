@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/UserContext';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-  const { signInWithGoogle, signin, resetPassword } = useContext(AuthContext);
+  const [userEmail, setUserEmail] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const from = location?.state?.from?.pathname || '/';
+
+  const { signInWithGoogle, signin, resetPassword } = useContext(AuthContext);
 
   //? Signin with email and password
   const handleSubmit = (e) => {
@@ -46,6 +48,21 @@ const Login = () => {
       });
   };
 
+  //* 7. reset password
+  const handlePasswordReset = (userEmail) => {
+    if (!userEmail) {
+      toast.info('Provide your email to reset password');
+      return;
+    }
+
+    resetPassword(userEmail)
+      .then(() => {
+        toast.info('Password Reset Email Sent');
+      })
+      .catch((error) => toast.error(error.message));
+    console.log(userEmail);
+  };
+
   return (
     <div className="flex justify-center items-center pt-8">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -67,6 +84,7 @@ const Login = () => {
                 Email address
               </label>
               <input
+                onBlur={(e) => setUserEmail(e.target.value)}
                 type="email"
                 name="email"
                 id="email"
@@ -101,7 +119,10 @@ const Login = () => {
           </div>
         </form>
         <div className="space-y-1">
-          <button className="text-xs hover:underline text-gray-400">
+          <button
+            onClick={() => handlePasswordReset(userEmail)}
+            className="text-xs hover:underline text-gray-400"
+          >
             Forgot password?
           </button>
         </div>

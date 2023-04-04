@@ -44,7 +44,7 @@ const Register = () => {
       });
   };
 
-  //? google signin
+  //? 4. google signin
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {

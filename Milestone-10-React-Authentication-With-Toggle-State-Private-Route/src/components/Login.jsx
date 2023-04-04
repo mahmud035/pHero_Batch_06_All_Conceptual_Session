@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/UserContext';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-  const { signInWithGoogle, signin } = useContext(AuthContext);
+  const { signInWithGoogle, signin, resetPassword } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  // console.log(location);
+
+  const from = location?.state?.from?.pathname || '/';
 
   //? Signin with email and password
   const handleSubmit = (e) => {
@@ -19,18 +23,23 @@ const Login = () => {
     signin(email, password)
       .then((result) => {
         console.log(result.user);
+
         toast.success('Sign in Successfully');
-        navigate('/');
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
 
+  //? 4. google signin
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(() => {
+        console.log(result.user);
+
         toast.success('Sign in Successfully');
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);

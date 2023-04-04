@@ -1,7 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../context/UserContext';
 
 const Register = () => {
+  const { createUser, updateName, verifyEmail } = useContext(AuthContext);
+
+  //? Signup with email and password
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    //* 1. create user
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+
+        //* 2. update name
+        updateName(name)
+          .then(() => {
+            toast.success('Name updated');
+
+            //* 3. email verification
+            verifyEmail()
+              .then(() => {
+                toast.info('Please check your email for verification link');
+              })
+              .catch((error) => {
+                toast.error(error.message);
+              });
+          })
+          .catch((error) => {
+            toast.error(error.message.slice(22, -2));
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        toast.error(error.message.slice(22, -2));
+        console.log(error);
+      });
+  };
+
   return (
     <div className="flex justify-center items-center pt-8">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -10,6 +53,7 @@ const Register = () => {
           <p className="text-sm text-gray-400">Create a new account</p>
         </div>
         <form
+          onSubmit={handleSubmit}
           noValidate=""
           action=""
           className="space-y-12 ng-untouched ng-pristine ng-valid"

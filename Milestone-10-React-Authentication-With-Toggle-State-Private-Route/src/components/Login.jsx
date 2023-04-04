@@ -51,13 +51,13 @@ const Login = () => {
   //* 7. reset password
   const handlePasswordReset = (userEmail) => {
     if (!userEmail) {
-      toast.info('Provide your email to reset password');
+      toast.warn('Provide your email to reset password');
       return;
     }
 
     resetPassword(userEmail)
       .then(() => {
-        toast.info('Password Reset Email Sent');
+        toast.success('Password Reset Email Sent. Please Check Email.');
       })
       .catch((error) => toast.error(error.message));
     console.log(userEmail);

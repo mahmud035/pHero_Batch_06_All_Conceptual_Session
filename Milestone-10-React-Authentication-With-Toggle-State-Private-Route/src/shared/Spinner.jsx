@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Loader = () => {
+const Spinner = () => {
   return (
     <div className="flex justify-center items-center h-full">
       <p className="text-7xl font-thin">L</p>
@@ -10,4 +10,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default Spinner;

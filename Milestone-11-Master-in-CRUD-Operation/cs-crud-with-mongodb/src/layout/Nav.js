@@ -1,5 +1,5 @@
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Avatar, Dropdown, Navbar } from 'flowbite-react';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
   return (
@@ -28,7 +28,9 @@ const Nav = () => {
         >
           <Dropdown.Header>
             <span className="block text-sm">John</span>
-            <span className="block truncate text-sm font-medium">john.doe@gmail.com</span>
+            <span className="block truncate text-sm font-medium">
+              john.doe@gmail.com
+            </span>
           </Dropdown.Header>
           <Dropdown.Item>
             <Link to="/dashboard">Dashboard</Link>

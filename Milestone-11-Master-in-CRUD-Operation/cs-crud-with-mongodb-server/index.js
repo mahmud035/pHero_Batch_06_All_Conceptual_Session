@@ -1,9 +1,25 @@
 const express = require('express');
+const { MongoClient } = require('mongodb');
 const app = express();
 require('colors');
 
 const PORT = process.env.PORT || 5000;
 
+const uri =
+  'mongodb+srv://crudOperation:GByKcm9sNaU4XJcU@cluster0.yeflywl.mongodb.net/?retryWrites=true&w=majority';
+
+const client = new MongoClient(uri);
+
+const dbConnect = async () => {
+  try {
+    await client.connect();
+    console.log(`Database Connected`.yellow.italic);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+dbConnect();
+
 app.listen(PORT, () => {
-  console.log(`Server up and running`.cyan.blue);
+  console.log(`Server Up and Running`.cyan.blue);
 });

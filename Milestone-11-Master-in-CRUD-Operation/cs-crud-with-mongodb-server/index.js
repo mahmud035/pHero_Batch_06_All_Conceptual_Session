@@ -14,8 +14,10 @@ const dbConnect = async () => {
   try {
     await client.connect();
     console.log(`Database Connected`.yellow.italic);
+
+    // undefined.null();
   } catch (error) {
-    console.log(error.message);
+    console.log(error.name.bgRed, error.message.bold, error.stack);
   }
 };
 dbConnect();

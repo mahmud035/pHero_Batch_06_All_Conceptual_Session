@@ -1,9 +1,9 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const auth = require("./middleware/auth");
-const express = require("express");
-require("dotenv").config();
-const jwt = require("jsonwebtoken");
-const cors = require("cors");
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const auth = require('./middleware/auth');
+const express = require('express');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
 const app = express();
 
 app.use(express.json());
@@ -19,7 +19,8 @@ app.use(cors());
  *  /register
  *  /users (protected)
  */
-const uri = process.env.DB_URL;
+const uri =
+  'mongodb+srv://dbuser1:VqlXwmSPGyn961n4@cluster0.yeflywl.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -31,20 +32,20 @@ client.connect((err) => {
     console.log(err);
   } else {
     // Our database is connected successfully
-    const db = client.db("test");
-    const usersCollection = db.collection("users");
+    const db = client.db('test');
+    const usersCollection = db.collection('users');
     // ROUTES
-    app.get("/users", auth, async (req, res) => {
-      const userCollection = db.collection("users");
+    app.get('/users', auth, async (req, res) => {
+      const userCollection = db.collection('users');
       const users = await userCollection.find().toArray();
 
       res.send({
-        status: "success",
+        status: 'success',
         data: users,
       });
     });
 
-    app.get("/p-users", async (req, res) => {
+    app.get('/p-users', async (req, res) => {
       // [1, 2, 3, 4, 5, 6] => 1 - 3, 4 - 6
 
       const limit = Number(req.query.limit) || 10;
@@ -66,37 +67,37 @@ client.connect((err) => {
       const count = await usersCollection.estimatedDocumentCount();
 
       res.send({
-        status: "success",
+        status: 'success',
         data: users,
         count: count,
       });
     });
 
-    app.post("/user/create", auth, async (req, res) => {
-      const user = await db.collection("users").insertOne({
-        name: "John Doe",
-        email: "tamim@gmail.com",
-        password: "123456",
+    app.post('/user/create', auth, async (req, res) => {
+      const user = await db.collection('users').insertOne({
+        name: 'John Doe',
+        email: 'tamim@gmail.com',
+        password: '123456',
       });
 
       res.send({
-        status: "success",
+        status: 'success',
         data: user,
       });
     });
 
     // registration
-    app.post("/register", async (req, res) => {
+    app.post('/register', async (req, res) => {
       const { name, email, password } = req.body;
 
       if (!name || !email || !password) {
         return res.send({
-          status: "error",
-          message: "Please provide all the vaules",
+          status: 'error',
+          message: 'Please provide all the vaules',
         });
       }
 
-      const usersCollection = db.collection("users");
+      const usersCollection = db.collection('users');
 
       const user = await usersCollection.insertOne({
         name,
@@ -105,32 +106,46 @@ client.connect((err) => {
       });
 
       res.send({
-        status: "success",
+        status: 'success',
         data: user,
       });
     });
 
     // login
-    app.post("/login", async (req, res) => {
+    app.post('/login', async (req, res) => {
+      //* NOTE: Steps for Creating JWT Token:
+      /**
+       * 1. validate body
+       * 2. find the user
+       * 3. if user not found, send invalid error response
+       * 4. user found
+       * 5. create token
+       * 6. send response
+       */
+
       const { email, password } = req.body;
 
       console.log(email, password);
+
+      // 1. validate body
       if (!email || !password) {
         return res.send({
-          status: "error",
-          message: "Please provide all the values",
+          status: 'error',
+          message: 'Please provide all the values',
         });
       }
 
-      const usersCollection = db.collection("users");
+      // 2. find the user
+      const usersCollection = db.collection('users');
       const user = await usersCollection.findOne({
         email: email,
       });
 
+      // 3. if user not found, send invalid error response
       if (!user) {
         return res.send({
-          status: "error",
-          message: "User does not exist",
+          status: 'error',
+          message: 'User does not exist',
         });
       }
 
@@ -142,29 +157,23 @@ client.connect((err) => {
       // This part will be skipped if user is found.
       if (!isPasswordCorrectUser) {
         return res.send({
-          status: "error",
-          message: "Invalid credentials",
+          status: 'error',
+          message: 'Invalid credentials',
         });
       }
 
-      /**
-       * 1. validate body
-       * 2. find the user
-       * 3. if user not found, send invalid error response
-       * 4. user found
-       * 5. create token
-       * 6. send response
-       */
-
+      // 4. user found
       const tokenObj = {
         email: isPasswordCorrectUser.email,
         id: isPasswordCorrectUser._id,
       };
 
+      // 5. create token
       const token = jwt.sign(tokenObj, process.env.JWT_SECRET);
 
+      // 6. send response
       res.send({
-        status: "success",
+        status: 'success',
         data: tokenObj,
         token: token,
       });
@@ -178,8 +187,8 @@ app.listen(process.env.PORT || 3000, () => {
     if (err) {
       console.log(err);
     } else {
-      console.log("Connected to MongoDB");
+      console.log('Connected to MongoDB');
     }
   });
-  console.log("Server is running on " + process.env.PORT);
+  console.log('Server is running on ' + process.env.PORT);
 });

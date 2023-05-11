@@ -96,6 +96,18 @@ app.delete('/products/:id', async (req, res) => {
   try {
     const id = req.params.id;
     // console.log(id);
+
+    // first get the product (to check if product already exists)
+    const product = await Products.findOne({ _id: ObjectId(id) });
+
+    if (!product?._id) {
+      res.send({
+        success: false,
+        message: `Product doesn't exist`,
+      });
+      return;
+    }
+
     const query = { _id: ObjectId(id) };
     const result = await Products.deleteOne(query);
 

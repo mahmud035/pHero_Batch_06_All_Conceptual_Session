@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Add = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const product = {
@@ -49,6 +52,7 @@ const Add = () => {
 
       if (data.success) {
         toast.success(data.message);
+        navigate('/dashboard/products');
       } else {
         toast.error(data.message);
       }
@@ -98,7 +102,7 @@ const Add = () => {
           </div>
 
           <div className="text-right">
-            <button className="py-3 px-8 bg-green-400 text-white font-bold">
+            <button className="py-3 px-8 bg-green-400 text-white font-bold rounded-lg">
               Add
             </button>
           </div>

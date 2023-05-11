@@ -1,5 +1,6 @@
 import { Dropdown, Table } from 'flowbite-react';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const ProductTable = ({ product, refetch, product2, refresh, setRefresh }) => {
@@ -9,15 +10,7 @@ const ProductTable = ({ product, refetch, product2, refresh, setRefresh }) => {
   // const { image, name, price, _id } = product2;
   // console.log(product2);
 
-  const handleUpdateProduct = (id) => {
-    fetch(`http://localhost:5000/products/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json',
-      },
-      // body:
-    });
-  };
+  const navigate = useNavigate();
 
   const handleDeleteProduct = (id) => {
     fetch(`http://localhost:5000/products/${id}`, {
@@ -49,7 +42,9 @@ const ProductTable = ({ product, refetch, product2, refresh, setRefresh }) => {
         <Table.Cell>{price}$</Table.Cell>
         <Table.Cell>
           <Dropdown label="Action" dismissOnClick={true} arrowIcon={false}>
-            <Dropdown.Item onClick={() => handleUpdateProduct(_id)}>
+            <Dropdown.Item
+              onClick={() => navigate(`/dashboard/product/edit/${_id}`)}
+            >
               Edit
             </Dropdown.Item>
             <Dropdown.Item onClick={() => handleDeleteProduct(_id)}>

@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 const Add = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,8 +21,14 @@ const Add = () => {
     //   body: JSON.stringify(product),
     // })
     //   .then((res) => res.json())
-    //   .then((result) => {
-    //     console.log(result);
+    //   .then((data) => {
+    //     // console.log(data);
+
+    //     if (data.success) {
+    //       toast.success(data.message);
+    //     } else {
+    //       toast.error(data.message);
+    //     }
     //   })
     //   .catch((error) => console.log(error.message));
   };
@@ -36,8 +44,14 @@ const Add = () => {
         body: JSON.stringify(product),
       });
 
-      const result = await res.json();
-      console.log(result);
+      const data = await res.json();
+      console.log(data);
+
+      if (data.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     } catch (error) {
       console.log(error.message);
     }

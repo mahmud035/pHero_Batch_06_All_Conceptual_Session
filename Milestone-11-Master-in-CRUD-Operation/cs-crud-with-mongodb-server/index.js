@@ -52,7 +52,7 @@ app.post('/products', async (req, res) => {
     const result = await Products.insertOne(product);
     // console.log(result);
 
-    undefined.null();
+    // undefined.null();
 
     if (result.insertedId) {
       res.send({

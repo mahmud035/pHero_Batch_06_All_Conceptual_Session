@@ -32,6 +32,7 @@ const Users = client.db('crudOperation').collection('users');
 
 // ============ API REQUEST ============
 //* GET
+// get all products
 app.get('/products', async (req, res) => {
   try {
     const products = await Products.find({}).toArray();
@@ -59,7 +60,37 @@ app.get('/products', async (req, res) => {
   }
 });
 
+// get single product
+app.get('/products/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = { _id: ObjectId(id) };
+    const product = await Products.findOne(query);
+
+    if (product) {
+      res.send({
+        success: true,
+        message: 'Product found',
+        data: product,
+      });
+    } else {
+      res.send({
+        success: false,
+        message: 'Product not found',
+      });
+    }
+  } catch (error) {
+    console.log(error.name.bgRed, error.message.bold, error.stack);
+
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
 //* POST
+// add a product
 app.post('/products', async (req, res) => {
   try {
     const product = req.body;
@@ -90,8 +121,45 @@ app.post('/products', async (req, res) => {
 });
 
 //* PUT / PATCH
+// update a product
+app.put('/products/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const filter = { _id: ObjectId(id) };
+    const product = req.body;
+    const options = { upsert: true };
+    const updatedProduct = {
+      $set: {
+        name: product.name,
+        price: product.price,
+        image: product.image,
+      },
+    };
+    const result = await Products.updateOne(filter, updatedProduct, options);
+
+    if (result.modifiedCount) {
+      res.send({
+        success: true,
+        message: 'Product updated successfully',
+      });
+    } else {
+      res.send({
+        success: false,
+        message: 'Product did not updated!! Something went wrong',
+      });
+    }
+  } catch (error) {
+    console.log(error.name.bgRed, error.message.bold, error.stack);
+
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
 //* DELETE
+// delete a product
 app.delete('/products/:id', async (req, res) => {
   try {
     const id = req.params.id;

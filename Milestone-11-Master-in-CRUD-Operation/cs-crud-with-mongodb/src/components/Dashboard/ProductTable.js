@@ -2,8 +2,12 @@ import { Dropdown, Table } from 'flowbite-react';
 import React from 'react';
 import { toast } from 'react-toastify';
 
-const ProductTable = ({ product, refetch }) => {
+const ProductTable = ({ product, refetch, product2, refresh, setRefresh }) => {
   const { image, name, price, _id } = product;
+  // console.log(product);
+
+  // const { image, name, price, _id } = product2;
+  // console.log(product2);
 
   const handleUpdateProduct = (id) => {
     fetch(`http://localhost:5000/products/${id}`, {
@@ -26,6 +30,8 @@ const ProductTable = ({ product, refetch }) => {
         if (data.success) {
           toast.success(data.message);
           refetch(); // refetching remaining products
+
+          // setRefresh(!refresh); // refetching data using useState()
         } else {
           toast.error(data.message);
         }
@@ -43,10 +49,10 @@ const ProductTable = ({ product, refetch }) => {
         <Table.Cell>{price}$</Table.Cell>
         <Table.Cell>
           <Dropdown label="Action" dismissOnClick={true} arrowIcon={false}>
-            <Dropdown.Item onClick={() => handleUpdateProduct(product._id)}>
+            <Dropdown.Item onClick={() => handleUpdateProduct(_id)}>
               Edit
             </Dropdown.Item>
-            <Dropdown.Item onClick={() => handleDeleteProduct(product._id)}>
+            <Dropdown.Item onClick={() => handleDeleteProduct(_id)}>
               Delete
             </Dropdown.Item>
           </Dropdown>

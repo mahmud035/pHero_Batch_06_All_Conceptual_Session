@@ -8,9 +8,9 @@ const Add = () => {
     };
 
     console.log(product);
-    postProduct(product);
+    postProduct(product); // call the function
 
-    //* POST product data using fetch() method
+    //* NOTE: POST product data using fetch() method
     // fetch(`http://localhost:5000/products`, {
     //   method: 'POST',
     //   headers: {
@@ -25,7 +25,7 @@ const Add = () => {
     //   .catch((error) => console.log(error.message));
   };
 
-  //! POST product data using "async...await" function.
+  //! NOTE: POST product data using "async...await" function.
   const postProduct = async (product) => {
     try {
       const res = await fetch(`http://localhost:5000/products`, {

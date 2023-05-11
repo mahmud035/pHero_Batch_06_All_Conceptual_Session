@@ -27,11 +27,10 @@ const AllProducts = () => {
     return <span>Error: {error.message}</span>;
   }
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <div className="w-full">
-      All products here
       <Table striped={true}>
         <Table.Head>
           <Table.HeadCell>Image</Table.HeadCell>

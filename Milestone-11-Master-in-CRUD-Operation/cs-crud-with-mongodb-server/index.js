@@ -34,7 +34,21 @@ const Users = client.db('crudOperation').collection('users');
 //* GET
 app.get('/products', async (req, res) => {
   try {
-    res.send('Here is your data');
+    const products = await Products.find({}).toArray();
+    // console.log(products);
+
+    if (products.length > 0) {
+      res.send({
+        success: true,
+        message: 'Products found',
+        data: products,
+      });
+    } else {
+      res.send({
+        success: false,
+        message: 'Products not found',
+      });
+    }
   } catch (error) {
     console.log(error.name.bgRed, error.message.bold, error.stack);
 

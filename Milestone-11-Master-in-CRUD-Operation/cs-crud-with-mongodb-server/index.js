@@ -1,5 +1,5 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const app = express();
 const cors = require('cors');
 require('colors');
@@ -92,6 +92,33 @@ app.post('/products', async (req, res) => {
 //* PUT / PATCH
 
 //* DELETE
+app.delete('/products/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    // console.log(id);
+    const query = { _id: ObjectId(id) };
+    const result = await Products.deleteOne(query);
+
+    if (result.deletedCount === 1) {
+      res.send({
+        success: true,
+        message: 'Product deleted successfully',
+      });
+    } else {
+      res.send({
+        success: false,
+        message: `Can't delete the product. Please Try again`,
+      });
+    }
+  } catch (error) {
+    console.log(error.name.bgRed, error.message.bold, error.stack);
+
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
 //* Global Error Handling
 app.use((error, req, res, next) => {

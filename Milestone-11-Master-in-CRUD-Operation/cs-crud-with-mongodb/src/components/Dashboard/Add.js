@@ -1,4 +1,3 @@
-
 const Add = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -9,9 +8,41 @@ const Add = () => {
     };
 
     console.log(product);
-    
+    postProduct(product);
+
+    //* POST product data using fetch() method
+    // fetch(`http://localhost:5000/products`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(product),
+    // })
+    //   .then((res) => res.json())
+    //   .then((result) => {
+    //     console.log(result);
+    //   })
+    //   .catch((error) => console.log(error.message));
   };
-  
+
+  //! POST product data using "async...await" function.
+  const postProduct = async (product) => {
+    try {
+      const res = await fetch(`http://localhost:5000/products`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+      });
+
+      const result = await res.json();
+      console.log(result);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className="py-32 px-10 min-h-screen w-full">
       <div className="bg-white p-10 md:w-3/4 lg:w-1/2 mx-auto">
@@ -53,7 +84,9 @@ const Add = () => {
           </div>
 
           <div className="text-right">
-            <button className="py-3 px-8 bg-green-400 text-white font-bold">Add</button>
+            <button className="py-3 px-8 bg-green-400 text-white font-bold">
+              Add
+            </button>
           </div>
         </form>
       </div>

@@ -1,4 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
+import ProductTable from './ProductTable';
+import { Table } from 'flowbite-react';
 
 const AllProducts = () => {
   const url = `http://localhost:5000/products`;
@@ -7,6 +9,7 @@ const AllProducts = () => {
     isError,
     data: products = [],
     error,
+    refetch,
   } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
@@ -26,7 +29,24 @@ const AllProducts = () => {
 
   console.log(products);
 
-  return <div>All products here</div>;
+  return (
+    <div className="w-full">
+      All products here
+      <Table striped={true}>
+        <Table.Head>
+          <Table.HeadCell>Image</Table.HeadCell>
+          <Table.HeadCell>Product Name</Table.HeadCell>
+          <Table.HeadCell>Price</Table.HeadCell>
+          <Table.HeadCell>Actions</Table.HeadCell>
+        </Table.Head>
+        <Table.Body className="divide-y">
+          {products.map((product, index) => (
+            <ProductTable key={index} product={product} refetch={refetch} />
+          ))}
+        </Table.Body>
+      </Table>
+    </div>
+  );
 };
 
 export default AllProducts;
